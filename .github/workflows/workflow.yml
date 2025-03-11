@@ -1,14 +1,15 @@
 name: CI workflow
-on: 
+
+on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
-    brances: ["main"]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: python3.9-slim
+    container: python:3.9-slim
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,8 +25,4 @@ jobs:
           flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run unit tests with nose
-        run: |
-          nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
-
-    
-
+        run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
